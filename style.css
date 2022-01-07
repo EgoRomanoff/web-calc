@@ -17,7 +17,7 @@ body {
           align-items: center;
   width: 100vw;
   height: 100vh;
-  background: #1a1a1a;
+  background: #262626;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -30,7 +30,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  max-width: 246px;
+  max-width: 255px;
 }
 
 .controls {
@@ -40,7 +40,7 @@ body {
       grid-template-columns: repeat(4, 60px);
   -ms-grid-rows: (60px)[4];
       grid-template-rows: repeat(4, 60px);
-  gap: 2px;
+  gap: 5px;
 }
 
 .output {
@@ -66,12 +66,31 @@ body {
           align-items: center;
   width: 100%;
   height: 60px;
-  border: none;
+  border: 2px solid #313131;
   font-family: inherit;
-  font-size: 21px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 400;
   line-height: 100%;
-  background: #fff;
+  border-radius: 4px;
+  background: linear-gradient(145deg, #2f2f2f, #262626);
+  -webkit-box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030;
+          box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030;
+  color: #b8b8b8;
+  cursor: pointer;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+.btn:hover, .btn:focus-visible {
+  color: #e3fbff;
+  -webkit-box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030, 0px 0px 7px rgba(109, 196, 243, 0.6);
+          box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030, 0px 0px 7px rgba(109, 196, 243, 0.6);
+  border-color: #3b3b3b;
+  outline: none;
+}
+
+.btn:active {
+  background: linear-gradient(145deg, #262626, #2f2f2f);
 }
 
 .btn--equally {
