@@ -5,16 +5,17 @@ const percentButton = document.querySelector('#percent')
 const clearButton = document.querySelector('#clear')
 const equallyButton = document.querySelector('#equally')
 
-let operand1 = 0
+let operand1 = undefined
 let operator = ''
-let operand2 = 0
+let operand2 = undefined
+let value = undefined
 let newOperandEntering = true
 
 window.addEventListener('click', function(e) {
 
   if (numbers.includes(e.target)) {
 
-    if ((output.value === '0' && e.target.value !== '.') || newOperandEntering) {
+    if (newOperandEntering) {
       output.value = e.target.value
       newOperandEntering = false
     } else {
@@ -24,28 +25,38 @@ window.addEventListener('click', function(e) {
   }
 
   if (operators.includes(e.target)) {
-    operand1 = parseFloat(output.value)
+
+    if (operand1 === undefined || operand2 !== undefined) {
+      operand1 = parseFloat(output.value)
+    } else {
+      value = operand1 = output.value = makeCalculation(operand1, operator, parseFloat(output.value))
+    }
+
     operator = e.target.value
     newOperandEntering = true
   }
 
-  // if (e.target === percentButton) {
-
-  // }
-
   if (e.target === equallyButton) {
     operand2 = parseFloat(output.value)
-    output.value = makeCalculation(operand1, operator, operand2)
-    operand1 = parseFloat(output.value)
+    value = makeCalculation(operand1, operator, operand2)
+    output.value = value
+
     newOperandEntering = true
   }
 
   if (e.target === clearButton) {
-    [operand1, operator, operand2] = [0, '', 0]
+    [operand1, operator, operand2] = [undefined, '', undefined]
     output.value = '0'
   }
 
+  console.log(`a = ${operand1}, b= ${operand2}, operator = ${operator}, value = ${value}`);
 })
+
+console.log(`a = ${operand1}, b= ${operand2}, operator = ${operator}, value = ${value}`);
+
+function outputValue (targetValue) {
+  output.value = targetValue
+}
 
 function makeCalculation (a, operator, b) {
 
