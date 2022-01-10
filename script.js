@@ -1,64 +1,143 @@
-const output = document.querySelector('.output')
-const numbers = Array.from(document.querySelectorAll('.btn--number'))
-const operators = Array.from(document.querySelectorAll('.btn--operator'))
-const percentButton = document.querySelector('#percent')
-const clearButton = document.querySelector('#clear')
-const equallyButton = document.querySelector('#equally')
+// TODO: все операнды и оператор занести в массив и при вводе новой переменной сделать проверку
 
-let operand1 = undefined
-let operator = ''
-let operand2 = undefined
-let value = undefined
-let newOperandEntering = true
+const output = document.querySelector('.output'),
+      keyboard = document.querySelector('.controls'),
+      numbers = Array.from(document.querySelectorAll('.btn--number')),
+      pointButton = document.querySelector('#point'),
+      signButton = document.querySelector('#sign'),
+      operators = Array.from(document.querySelectorAll('.btn--operator')),
+      backspaceButton = document.querySelector('#backspace'),
+      clearButton = document.querySelector('#clear'),
+      equallyButton = document.querySelector('#equally')
 
-window.addEventListener('click', function(e) {
-
-  if (numbers.includes(e.target)) {
-
-    if (newOperandEntering) {
-      output.value = e.target.value
-      newOperandEntering = false
-    } else {
-      output.value += e.target.value
-    }
-
-  }
-
-  if (operators.includes(e.target)) {
-
-    if (operand1 === undefined || operand2 !== undefined) {
-      operand1 = parseFloat(output.value)
-    } else {
-      value = operand1 = output.value = makeCalculation(operand1, operator, parseFloat(output.value))
-    }
-
-    operator = e.target.value
+let currentOperand = '0',
+    operand1 = undefined,
+    operator = undefined,
+    operand2 = undefined,
+    currentResult = undefined,
     newOperandEntering = true
-  }
 
-  if (e.target === equallyButton) {
-    operand2 = parseFloat(output.value)
-    value = makeCalculation(operand1, operator, operand2)
-    output.value = value
+keyboard.addEventListener('click', e => {
 
-    newOperandEntering = true
-  }
+  if (numbers.includes(e.target)) enterNumber(e.target)
 
-  if (e.target === clearButton) {
-    [operand1, operator, operand2] = [undefined, '', undefined]
-    output.value = '0'
-  }
+  if (e.target === pointButton) enterPoint()
 
-  console.log(`a = ${operand1}, b= ${operand2}, operator = ${operator}, value = ${value}`);
+  if (e.target === signButton) toggleSign()
+
+  if (operators.includes(e.target)) enterOperator(e.target)
+
+  if (e.target === equallyButton) calculateResult()
+
+  if (e.target === backspaceButton) deleteLastSymbol()
+
+  if (e.target === clearButton) clearData()
+
 })
 
-console.log(`a = ${operand1}, b= ${operand2}, operator = ${operator}, value = ${value}`);
+function enterNumber(numButton) {
 
-function outputValue (targetValue) {
-  output.value = targetValue
+  if (newOperandEntering) {
+    currentOperand = numButton.value
+    newOperandEntering = false
+  } else {
+    currentOperand += numButton.value
+  }
+
+  outputValue(currentOperand)
+
 }
 
-function makeCalculation (a, operator, b) {
+function enterPoint() {
+
+  if (currentOperand.includes('.')) {
+    return 0
+  } else {
+    newOperandEntering = false
+    currentOperand += pointButton.value
+    outputValue(currentOperand)
+  }
+
+}
+
+function toggleSign() {
+
+  if (currentOperand === '0'){
+    return 0
+  } else if (currentOperand.slice(0, 1) !== '-') {
+    currentOperand = '-' + currentOperand
+  } else {
+    currentOperand = currentOperand.slice(1)
+  }
+
+  outputValue(currentOperand)
+}
+
+function enterOperator(operButton) {
+
+  if (operand1 === undefined) {
+    currentResult = operand1 = parseFloat(currentOperand)
+  } else if (operand2 === undefined) {
+    operand2 = parseFloat(currentOperand)
+    currentResult = makeCalculation(operand1, operator, operand2)
+    operand1 = currentResult
+    operand2 = undefined
+    outputValue(currentResult)
+  } else {
+    operand2 = undefined
+  }
+
+  operator = operButton.value
+  newOperandEntering = true
+
+}
+
+function calculateResult() {
+
+  if (operator === undefined) {
+    return 0
+  } else if (operand2 === undefined) {
+    operand2 = parseFloat(currentOperand)
+    currentResult = makeCalculation(operand1, operator, operand2)
+    operand1 = currentResult
+    outputValue(currentResult)
+  } else {
+    currentResult = makeCalculation(operand1, operator, operand2)
+    operand1 = currentResult
+    outputValue(currentResult)
+  }
+
+  newOperandEntering = true
+
+}
+
+function deleteLastSymbol() {
+
+  if (newOperandEntering) {
+    return 0
+  } else if (currentOperand.length === 1) {
+    currentOperand = '0'
+    newOperandEntering = true
+  } else {
+    currentOperand = currentOperand.slice(0, -1)
+  }
+
+  outputValue(currentOperand)
+
+}
+
+function outputValue(targetValue) {
+  output.value = String(targetValue)
+}
+
+function clearData() {
+
+  [currentOperand, operand1, operator, operand2, currentResult, newOperandEntering] = ['0', undefined, undefined, undefined, undefined, true]
+  outputValue(currentOperand)
+
+}
+
+function makeCalculation(a, operator, b) {
 
   switch (operator) {
     case 'add' :
@@ -77,7 +156,7 @@ function makeCalculation (a, operator, b) {
 
 }
 
-function makeDivision (a, b) {
+function makeDivision(a, b) {
 
   return (b === 0 ? 'Error (x / 0)' : a / b)
 
