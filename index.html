@@ -10,15 +10,19 @@
 <body>
   <div class="container">
 
-    <input class="output" type="text" name="output" id="output" value="0" readonly>
-    
+
+    <div class="output">
+      <input class="output__item output--top" type="text" name="output" id="output1" readonly>
+      <input class="output__item output--bottom" type="text" name="output" id="output2" value="0" readonly>
+    </div>
+
     <div class="controls">
 
       <div class="operators__container">
         <button class="btn btn--operator" id="addition" value="add">+</button>
         <button class="btn btn--operator" id="subtraction" value="sub">-</button>
-        <button class="btn btn--operator" id="multiplication" value="multiply">*</button>
-        <button class="btn btn--operator" id="division" value="div">&#xf7</button>
+        <button class="btn btn--operator" id="multiplication" value="mul">&#215;</button>
+        <button class="btn btn--operator" id="division" value="div">&#247;</button>
       </div>
 
       <div class="main-keyboard__container">
@@ -40,7 +44,7 @@
 
         <div class="main-keyboard__bottom">
           <button class="btn btn--clear" id="clear" value="clear">C</button>
-          <button class="btn btn--backspace" id="backspace" value="backspace">&lt;x</button>
+          <button class="btn btn--backspace" id="backspace" value="backspace">&#8592;</button>
           <button class="btn btn--equally" id="equally" value="equally">=</button>
         </div>
       </div>

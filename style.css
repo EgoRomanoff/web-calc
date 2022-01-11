@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +19,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: #1a1a1a;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .container {
@@ -30,7 +31,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 259px;
+  width: 320px;
   padding: 20px;
   border: 2px solid #2f2f2f;
   border-radius: 10px;
@@ -71,6 +72,7 @@ body {
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
   gap: 5px;
+  margin: 10px 0;
 }
 
 .main-keyboard__bottom {
@@ -82,19 +84,47 @@ body {
 }
 
 .output {
-  height: 70px;
-  outline: none;
-  font-size: 32px;
-  text-align: right;
-  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 14px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #262626;
+  -webkit-box-shadow: inset 7px 7px 14px #202020, inset -7px -7px 14px #2c2c2c;
+          box-shadow: inset 7px 7px 14px #202020, inset -7px -7px 14px #2c2c2c;
+}
+
+.output__item {
+  width: 100%;
+  outline: none;
   border: none;
-  background: linear-gradient(145deg, #2f2f2f, #262626);
-  color: #b8b8b8;
-  border-radius: 4px;
-  -webkit-box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030;
-          box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  color: #c4c4c4;
+  font-size: 24px;
+  text-align: right;
+}
+
+.output__item + .output__item {
+  margin-top: 8px;
+}
+
+.output--top {
+  font-size: 16px;
+  color: #929292;
+}
+
+.output--bottom {
+  font-size: 32px;
 }
 
 .btn {
@@ -109,29 +139,43 @@ body {
           align-items: center;
   width: 100%;
   height: 50px;
-  border: 2px solid #313131;
+  border: 2px solid #303030;
   font-family: inherit;
   font-size: 24px;
   font-weight: 400;
-  line-height: 100%;
-  border-radius: 4px;
-  background: linear-gradient(145deg, #2f2f2f, #262626);
-  -webkit-box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030;
-          box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030;
-  color: #b8b8b8;
+  border-radius: 10px;
+  background: #262626;
+  -webkit-box-shadow: 5px 5px 10px #202020, -5px -5px 10px #2c2c2c;
+          box-shadow: 5px 5px 10px #202020, -5px -5px 10px #2c2c2c;
+  color: #c4c4c4;
   cursor: pointer;
   -webkit-transition: .15s;
   transition: .15s;
 }
 
 .btn:hover, .btn:focus-visible {
-  color: #e3fbff;
-  -webkit-box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030, 0px 0px 7px rgba(109, 196, 243, 0.6);
-          box-shadow: 4px 4px 10px #1d1d1d, -4px -4px 10px #303030, 0px 0px 7px rgba(109, 196, 243, 0.6);
-  border-color: #3b3b3b;
+  color: #dffffd;
+  border-color: #424242;
   outline: none;
 }
 
 .btn:active {
-  background: linear-gradient(145deg, #262626, #2f2f2f);
+  background: linear-gradient(145deg, #222222, #292929);
+}
+
+.btn--operator, .btn--equally {
+  border-color: #26333f;
+  font-size: 28px;
+}
+
+.btn--operator:hover, .btn--equally:hover {
+  border-color: #314b61;
+}
+
+.btn--clear, .btn--backspace {
+  border-color: #3f2c26;
+}
+
+.btn--clear:hover, .btn--backspace:hover {
+  border-color: #613731;
 }

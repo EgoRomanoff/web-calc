@@ -1,6 +1,5 @@
-// TODO: все операнды и оператор занести в массив и при вводе новой переменной сделать проверку
-
-const output = document.querySelector('.output'),
+const outputTop = document.querySelector('#output1'),
+      outputBottom = document.querySelector('#output2'),
       keyboard = document.querySelector('.controls'),
       numbers = Array.from(document.querySelectorAll('.btn--number')),
       pointButton = document.querySelector('#point'),
@@ -9,6 +8,14 @@ const output = document.querySelector('.output'),
       backspaceButton = document.querySelector('#backspace'),
       clearButton = document.querySelector('#clear'),
       equallyButton = document.querySelector('#equally')
+
+// const curCalculation = {
+//   curOperand: '0',
+//   operand1: undefined,
+//   operator: undefined,
+//   operand2: undefined,
+//   curResult: undefined
+// }
 
 let currentOperand = '0',
     operand1 = undefined,
@@ -45,22 +52,28 @@ function enterNumber(numButton) {
   }
 
   outputValue(currentOperand)
-
+  outputExpression(numButton.value)
 }
 
 function enterPoint() {
 
   if (currentOperand.includes('.')) {
     return 0
-  } else {
-    newOperandEntering = false
-    currentOperand += pointButton.value
-    outputValue(currentOperand)
   }
+
+  newOperandEntering = false
+  currentOperand += pointButton.value
+  outputValue(currentOperand)
+  outputExpression(pointButton.value)
 
 }
 
 function toggleSign() {
+
+  if (operand2 !== undefined) {
+    operand1 = undefined
+    operand2 = undefined
+  }
 
   if (currentOperand === '0'){
     return 0
@@ -71,6 +84,8 @@ function toggleSign() {
   }
 
   outputValue(currentOperand)
+
+  console.log(currentOperand, operand1, operator, operand2, currentResult, newOperandEntering);
 }
 
 function enterOperator(operButton) {
@@ -79,17 +94,19 @@ function enterOperator(operButton) {
     currentResult = operand1 = parseFloat(currentOperand)
   } else if (operand2 === undefined) {
     operand2 = parseFloat(currentOperand)
-    currentResult = makeCalculation(operand1, operator, operand2)
-    operand1 = currentResult
+    operand1 = currentResult = makeCalculation(operand1, operator, operand2)
     operand2 = undefined
-    outputValue(currentResult)
+    currentOperand = String(currentResult)
+    outputValue(currentOperand)
   } else {
     operand2 = undefined
   }
 
   operator = operButton.value
   newOperandEntering = true
+  outputExpression(operButton)
 
+  console.log(currentOperand, operand1, operator, operand2, currentResult, newOperandEntering);
 }
 
 function calculateResult() {
@@ -98,17 +115,16 @@ function calculateResult() {
     return 0
   } else if (operand2 === undefined) {
     operand2 = parseFloat(currentOperand)
-    currentResult = makeCalculation(operand1, operator, operand2)
-    operand1 = currentResult
-    outputValue(currentResult)
-  } else {
-    currentResult = makeCalculation(operand1, operator, operand2)
-    operand1 = currentResult
-    outputValue(currentResult)
   }
 
+  console.log(currentOperand, operand1, operator, operand2, currentResult);
+
+  operand1 = currentResult = makeCalculation(operand1, operator, operand2)
+  currentOperand = String(currentResult)
+  outputValue(currentOperand)
   newOperandEntering = true
 
+  console.log(currentOperand, operand1, operator, operand2, currentResult, newOperandEntering);
 }
 
 function deleteLastSymbol() {
@@ -126,15 +142,38 @@ function deleteLastSymbol() {
 
 }
 
+function outputExpression(targetValue) {
+
+  if (typeof targetValue === 'object') {
+    switch (targetValue.value) {
+      case 'add' :
+        outputTop.value += ' + '
+        break
+      case 'sub' :
+        outputTop.value += ' - '
+        break
+      case 'mul' :
+        outputTop.value += ' \u00D7 '
+        break
+      case 'div' :
+        outputTop.value += ' \u00F7 '
+        break
+    }
+  } else {
+    outputTop.value += targetValue
+  }
+
+}
+
 function outputValue(targetValue) {
-  output.value = String(targetValue)
+  outputBottom.value = String(targetValue)
 }
 
 function clearData() {
 
   [currentOperand, operand1, operator, operand2, currentResult, newOperandEntering] = ['0', undefined, undefined, undefined, undefined, true]
   outputValue(currentOperand)
-
+  outputTop.value = ''
 }
 
 function makeCalculation(a, operator, b) {
@@ -146,7 +185,7 @@ function makeCalculation(a, operator, b) {
     case 'sub' :
       return (a - b)
       break
-    case 'multiply' :
+    case 'mul' :
       return (a * b)
       break
     case 'div' :
