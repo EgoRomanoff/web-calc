@@ -16,37 +16,43 @@
       <input class="output__item output--bottom" type="text" name="output" id="output2" value="0" readonly>
     </div>
 
-    <div class="controls">
+    <div class="keyboard">
 
-      <div class="operators__container">
+      <div class="keyboard__operators operators--top">
+        <button class="btn btn--operator" id="factorial" value="fact" data-unary>!</button>
+        <button class="btn btn--operator" id="percent" value="perc" data-unary>%</button>
+        <button class="btn btn--operator" id="square" value="square" data-unary>x&#178;</button>
+        <button class="btn btn--operator" id="sqroot" value="sqrt" data-unary>&#8730;</button>
+      </div>
+
+      <div class="keyboard__operators operators--aside">
         <button class="btn btn--operator" id="addition" value="add">+</button>
         <button class="btn btn--operator" id="subtraction" value="sub">-</button>
         <button class="btn btn--operator" id="multiplication" value="mul">&#215;</button>
         <button class="btn btn--operator" id="division" value="div">&#247;</button>
       </div>
 
-      <div class="main-keyboard__container">
+      <div class="keyboard__numbers">
 
-        <div class="main-keyboard__numbers">
-          <button class="btn btn--number" id="1" value="1">1</button>
-          <button class="btn btn--number" id="2" value="2">2</button>
-          <button class="btn btn--number" id="3" value="3">3</button>
-          <button class="btn btn--number" id="4" value="4">4</button>
-          <button class="btn btn--number" id="5" value="5">5</button>
-          <button class="btn btn--number" id="6" value="6">6</button>
-          <button class="btn btn--number" id="7" value="7">7</button>
-          <button class="btn btn--number" id="8" value="8">8</button>
-          <button class="btn btn--number" id="9" value="9">9</button>
-          <button class="btn btn--sign" id="sign" value="sign">+/-</button>
-          <button class="btn btn--number" id="0" value="0">0</button>
-          <button class="btn btn--point" id="point" value=".">.</button>
-        </div>
+        <button class="btn btn--number" id="1" value="1">1</button>
+        <button class="btn btn--number" id="2" value="2">2</button>
+        <button class="btn btn--number" id="3" value="3">3</button>
+        <button class="btn btn--number" id="4" value="4">4</button>
+        <button class="btn btn--number" id="5" value="5">5</button>
+        <button class="btn btn--number" id="6" value="6">6</button>
+        <button class="btn btn--number" id="7" value="7">7</button>
+        <button class="btn btn--number" id="8" value="8">8</button>
+        <button class="btn btn--number" id="9" value="9">9</button>
+        <button class="btn btn--sign" id="sign" value="sign">+/-</button>
+        <button class="btn btn--number" id="0" value="0">0</button>
+        <button class="btn btn--point" id="point" value=".">.</button>
 
-        <div class="main-keyboard__bottom">
-          <button class="btn btn--clear" id="clear" value="clear">C</button>
-          <button class="btn btn--backspace" id="backspace" value="backspace">&#8592;</button>
-          <button class="btn btn--equally" id="equally" value="equally">=</button>
-        </div>
+      </div>
+
+      <div class="keyboard__bottom">
+        <button class="btn btn--clear" id="clear" value="clear">C</button>
+        <button class="btn btn--backspace" id="backspace" value="backspace">&#8592;</button>
+        <button class="btn btn--equally" id="equally" value="equally">=</button>
       </div>
 
     </div>

@@ -33,54 +33,8 @@ body {
           flex-direction: column;
   width: 320px;
   padding: 20px;
-  border: 2px solid #2f2f2f;
   border-radius: 10px;
   background: #262626;
-}
-
-.controls {
-  display: -ms-grid;
-  display: grid;
-      grid-template-areas: 'operators' 'keyboard';
-  gap: 5px;
-}
-
-.operators__container {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  grid-area: operators;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-}
-
-.main-keyboard__container {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  grid-area: keyboard;
-  display: -ms-grid;
-  display: grid;
-      grid-template-areas: 'numbers' 'bottom';
-  gap: 5px;
-}
-
-.main-keyboard__numbers {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  margin: 10px 0;
-}
-
-.main-keyboard__bottom {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
 }
 
 .output {
@@ -127,6 +81,62 @@ body {
   font-size: 32px;
 }
 
+.keyboard {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'operTop operTop operTop operTop' 'keysCenter keysCenter keysCenter operAside' 'keysBottom keysBottom keysBottom keysBottom';
+  gap: 5px;
+}
+
+.keyboard .operators--top {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: operTop;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.keyboard .operators--aside {
+  -ms-grid-row: 2;
+  -ms-grid-column: 4;
+  grid-area: operAside;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: (1fr)[4];
+      grid-template-rows: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.keyboard__numbers {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: keysCenter;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.keyboard__bottom {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: keysBottom;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
 .btn {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -138,6 +148,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  min-width: 50px;
   height: 50px;
   border: 2px solid #303030;
   font-family: inherit;
@@ -165,7 +176,7 @@ body {
 
 .btn--operator, .btn--equally {
   border-color: #26333f;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .btn--operator:hover, .btn--equally:hover {
@@ -178,4 +189,8 @@ body {
 
 .btn--clear:hover, .btn--backspace:hover {
   border-color: #613731;
+}
+
+.btn sup {
+  font-size: 14px;
 }

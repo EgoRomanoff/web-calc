@@ -1,6 +1,6 @@
 const outputTop = document.querySelector('#output1'),
       outputBottom = document.querySelector('#output2'),
-      keyboard = document.querySelector('.controls'),
+      keyboard = document.querySelector('.keyboard'),
       numbers = Array.from(document.querySelectorAll('.btn--number')),
       pointButton = document.querySelector('#point'),
       signButton = document.querySelector('#sign'),
@@ -32,7 +32,14 @@ keyboard.addEventListener('click', e => {
 
   if (e.target === signButton) toggleSign()
 
-  if (operators.includes(e.target)) enterOperator(e.target)
+  if (operators.includes(e.target)) {
+
+    if (e.target.hasAttribute('data-unary')) {
+      calculateUnary(e.target.value)
+    } else {
+      enterOperator(e.target)
+    }
+  }
 
   if (e.target === equallyButton) calculateResult()
 
@@ -40,6 +47,7 @@ keyboard.addEventListener('click', e => {
 
   if (e.target === clearButton) clearData()
 
+  console.log(currentOperand, operand1, operator, operand2, currentResult, newOperandEntering);
 })
 
 function enterNumber(numButton) {
@@ -106,7 +114,15 @@ function enterOperator(operButton) {
   newOperandEntering = true
   outputExpression(operButton)
 
-  console.log(currentOperand, operand1, operator, operand2, currentResult, newOperandEntering);
+}
+
+function calculateUnary(unaryOperator) {
+
+  outputExpression(unaryOperator)
+  currentOperand = String(makeCalculation(parseFloat(currentOperand), unaryOperator))
+  outputValue(currentOperand)
+  newOperandEntering = true
+
 }
 
 function calculateResult() {
@@ -116,8 +132,6 @@ function calculateResult() {
   } else if (operand2 === undefined) {
     operand2 = parseFloat(currentOperand)
   }
-
-  console.log(currentOperand, operand1, operator, operand2, currentResult);
 
   operand1 = currentResult = makeCalculation(operand1, operator, operand2)
   currentOperand = String(currentResult)
@@ -134,8 +148,10 @@ function deleteLastSymbol() {
   } else if (currentOperand.length === 1) {
     currentOperand = '0'
     newOperandEntering = true
+    outputTop.value = outputTop.value.slice(0, -1)
   } else {
     currentOperand = currentOperand.slice(0, -1)
+    outputTop.value = outputTop.value.slice(0, -1)
   }
 
   outputValue(currentOperand)
@@ -160,7 +176,24 @@ function outputExpression(targetValue) {
         break
     }
   } else {
-    outputTop.value += targetValue
+    switch(targetValue) {
+      case 'fact' :
+        outputTop.value += '!'
+        break
+      case 'perc' :
+        //TODO:исправить неправильный вывод
+        outputTop.value = `1%(${outputTop.value})`
+        break
+      case 'square' :
+        outputTop.value += '\u00B2'
+        break
+      case 'sqrt' :
+        //TODO:исправить неправильный вывод
+        outputTop.value = `\u221A(${outputTop.value})`
+        break
+      default :
+        outputTop.value += targetValue
+    }
   }
 
 }
@@ -176,7 +209,7 @@ function clearData() {
   outputTop.value = ''
 }
 
-function makeCalculation(a, operator, b) {
+function makeCalculation(a, operator, b = 0) {
 
   switch (operator) {
     case 'add' :
@@ -189,14 +222,28 @@ function makeCalculation(a, operator, b) {
       return (a * b)
       break
     case 'div' :
-      return makeDivision(a, b)
+      return calcDivision(a, b)
+      break
+    case 'fact' :
+      return calcFactorial(a)
+      break
+    case 'perc' :
+      return (a / 100)
+      break
+    case 'square' :
+      return Math.pow(a, 2)
+      break
+    case 'sqrt' :
+      return Math.sqrt(a)
       break
   }
 
 }
 
-function makeDivision(a, b) {
-
+function calcDivision(a, b) {
   return (b === 0 ? 'Error (x / 0)' : a / b)
+}
 
+function calcFactorial(n) {
+  return (n != 1) ? n * calcFactorial(n - 1) : 1
 }

@@ -22,49 +22,8 @@ body {
   flex-direction: column;
   width: 320px;
   padding: 20px;
-  border: 2px solid #2f2f2f;
   border-radius: 10px;
   background: #262626;
-}
-
-.controls {
-  display: grid;
-  grid-template-areas:
-    'operators'
-    'keyboard';
-  gap: 5px;
-}
-
-.operators__container {
-  grid-area: operators;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-}
-
-.main-keyboard {
-
-  &__container {
-    grid-area: keyboard;
-    display: grid;
-    grid-template-areas:
-      'numbers'
-      'bottom';
-    gap: 5px;
-  }
-
-  &__numbers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    margin: 10px 0;
-  }
-
-  &__bottom {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
 }
 
 .output {
@@ -104,11 +63,50 @@ body {
   }
 }
 
+.keyboard {
+  display: grid;
+  grid-template-areas:
+    'operTop operTop operTop operTop'
+    'keysCenter keysCenter keysCenter operAside'
+    'keysBottom keysBottom keysBottom keysBottom';
+  gap: 5px;
+
+  .operators--top {
+    grid-area: operTop;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+  }
+
+  .operators--aside {
+    grid-area: operAside;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 5px;
+  }
+
+  &__numbers {
+    grid-area: keysCenter;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+
+  &__bottom {
+    grid-area: keysBottom;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+}
+
 .btn {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-width: 50px;
   height: 50px;
   border: 2px solid #303030;
   font-family: inherit;
@@ -134,7 +132,7 @@ body {
 
   &--operator, &--equally {
     border-color: #26333f;
-    font-size: 28px;
+    font-size: 24px;
 
     &:hover {
       border-color: #314b61;
@@ -147,5 +145,9 @@ body {
     &:hover {
       border-color: #613731;
     }
+  }
+
+  sup {
+    font-size: 14px;
   }
 }
