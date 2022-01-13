@@ -13,91 +13,87 @@ body {
   width: 100vw;
   height: 100vh;
   background: #1a1a1a;
-  font-family: 'Inter', sans-serif;
+  font: 16px/24px 'Inter', sans-serif;
 }
 
-.container {
+.calculator {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 320px;
+  border-radius: 10px;
   padding: 20px;
-  border-radius: 10px;
   background: #262626;
-}
 
-.output {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 14px;
-  width: 100%;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  background: #262626;
-  box-shadow: inset 7px 7px 14px #202020,
-              inset -7px -7px 14px #2c2c2c;
-
-  &__item {
+  &__output {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    outline: none;
-    border: none;
-    background: transparent;
-    font-family: 'Inter', sans-serif;
-    color: #c4c4c4;
-    font-size: 24px;
-    text-align: right;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 14px;
+    background: #262626;
+    box-shadow: inset 7px 7px 14px #202020,
+                inset -7px -7px 14px #2c2c2c;
 
-    & + & {
-      margin-top: 8px;
+    .output__item {
+      width: 100%;
+      height: 40px;
+      outline: none;
+      border: none;
+      background: transparent;
+      color: #c4c4c4;
+      font: 1.5rem/100% 'Inter', sans-serif;
+      font-size: 24px;
+      text-align: right;
+
+      &--top {
+        font-size: 1rem;
+        color: #929292;
+      }
+
+      &--bottom {
+        font-size: 2rem;
+      }
     }
   }
 
-  &--top {
-    font-size: 16px;
-    color: #929292;
-  }
-
-  &--bottom {
-    font-size: 32px;
-  }
-}
-
-.keyboard {
-  display: grid;
-  grid-template-areas:
-    'operTop operTop operTop operTop'
-    'keysCenter keysCenter keysCenter operAside'
-    'keysBottom keysBottom keysBottom keysBottom';
-  gap: 5px;
-
-  .operators--top {
-    grid-area: operTop;
+  &__keyboard {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      'oper-top oper-top oper-top oper-top'
+      'num-center num-center num-center oper-aside'
+      'btn-bottom btn-bottom btn-bottom btn-bottom';
     gap: 5px;
-  }
 
-  .operators--aside {
-    grid-area: operAside;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
-    gap: 5px;
-  }
+    .operators--top, .operators--aside,
+    .keyboard__numbers, .keyboard__bottom {
+      display: grid;
+      gap: 5px;
+    }
 
-  &__numbers {
-    grid-area: keysCenter;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
+    .operators--top {
+      grid-area: oper-top;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 8px;
+    }
 
-  &__bottom {
-    grid-area: keysBottom;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    .operators--aside {
+      grid-area: oper-aside;
+      grid-template-rows: repeat(4, 1fr);
+    }
+
+    .keyboard__numbers {
+      grid-area: num-center;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .keyboard__bottom {
+      grid-area: btn-bottom;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 8px;
+    }
   }
 }
 
@@ -109,21 +105,19 @@ body {
   min-width: 50px;
   height: 50px;
   border: 2px solid #303030;
-  font-family: inherit;
-  font-size: 24px;
-  font-weight: 400;
   border-radius: 10px;
+  color: #c4c4c4;
+  font-size: 1.5rem;
   background: #262626;
   box-shadow: 5px 5px 10px #202020,
               -5px -5px 10px #2c2c2c;
-  color: #c4c4c4;
   cursor: pointer;
   transition: .15s;
 
   &:hover, &:focus-visible {
-    color: #dffffd;
-    border-color: #424242;
     outline: none;
+    border-color: #424242;
+    color: #dffffd;
   }
 
   &:active {
@@ -132,10 +126,14 @@ body {
 
   &--operator, &--equally {
     border-color: #26333f;
-    font-size: 24px;
+    font-size: 1.75rem;
 
     &:hover {
       border-color: #314b61;
+    }
+
+    &[data-unary] {
+      font-size: 1.5rem;
     }
   }
 
@@ -145,9 +143,5 @@ body {
     &:hover {
       border-color: #613731;
     }
-  }
-
-  sup {
-    font-size: 14px;
   }
 }

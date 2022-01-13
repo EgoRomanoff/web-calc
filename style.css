@@ -19,10 +19,10 @@ body {
   width: 100vw;
   height: 100vh;
   background: #1a1a1a;
-  font-family: 'Inter', sans-serif;
+  font: 16px/24px 'Inter', sans-serif;
 }
 
-.container {
+.calculator {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -32,12 +32,12 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 320px;
-  padding: 20px;
   border-radius: 10px;
+  padding: 20px;
   background: #262626;
 }
 
-.output {
+.calculator__output {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -48,93 +48,85 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 14px;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-radius: 10px;
+  padding: 14px;
   background: #262626;
   -webkit-box-shadow: inset 7px 7px 14px #202020, inset -7px -7px 14px #2c2c2c;
           box-shadow: inset 7px 7px 14px #202020, inset -7px -7px 14px #2c2c2c;
 }
 
-.output__item {
+.calculator__output .output__item {
   width: 100%;
+  height: 40px;
   outline: none;
   border: none;
   background: transparent;
-  font-family: 'Inter', sans-serif;
   color: #c4c4c4;
+  font: 1.5rem/100% 'Inter', sans-serif;
   font-size: 24px;
   text-align: right;
 }
 
-.output__item + .output__item {
-  margin-top: 8px;
-}
-
-.output--top {
-  font-size: 16px;
+.calculator__output .output__item--top {
+  font-size: 1rem;
   color: #929292;
 }
 
-.output--bottom {
-  font-size: 32px;
+.calculator__output .output__item--bottom {
+  font-size: 2rem;
 }
 
-.keyboard {
+.calculator__keyboard {
   display: -ms-grid;
   display: grid;
-      grid-template-areas: 'operTop operTop operTop operTop' 'keysCenter keysCenter keysCenter operAside' 'keysBottom keysBottom keysBottom keysBottom';
+      grid-template-areas: 'oper-top oper-top oper-top oper-top' 'num-center num-center num-center oper-aside' 'btn-bottom btn-bottom btn-bottom btn-bottom';
   gap: 5px;
 }
 
-.keyboard .operators--top {
+.calculator__keyboard .operators--top, .calculator__keyboard .operators--aside,
+.calculator__keyboard .keyboard__numbers, .calculator__keyboard .keyboard__bottom {
+  display: -ms-grid;
+  display: grid;
+  gap: 5px;
+}
+
+.calculator__keyboard .operators--top {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   -ms-grid-column-span: 4;
-  grid-area: operTop;
-  display: -ms-grid;
-  display: grid;
+  grid-area: oper-top;
   -ms-grid-columns: (1fr)[4];
       grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
+  margin-bottom: 8px;
 }
 
-.keyboard .operators--aside {
+.calculator__keyboard .operators--aside {
   -ms-grid-row: 2;
   -ms-grid-column: 4;
-  grid-area: operAside;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
+  grid-area: oper-aside;
   -ms-grid-rows: (1fr)[4];
       grid-template-rows: repeat(4, 1fr);
-  gap: 5px;
 }
 
-.keyboard__numbers {
+.calculator__keyboard .keyboard__numbers {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;
-  grid-area: keysCenter;
-  display: -ms-grid;
-  display: grid;
+  grid-area: num-center;
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
 }
 
-.keyboard__bottom {
+.calculator__keyboard .keyboard__bottom {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   -ms-grid-column-span: 4;
-  grid-area: keysBottom;
-  display: -ms-grid;
-  display: grid;
+  grid-area: btn-bottom;
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
+  margin-top: 8px;
 }
 
 .btn {
@@ -151,23 +143,21 @@ body {
   min-width: 50px;
   height: 50px;
   border: 2px solid #303030;
-  font-family: inherit;
-  font-size: 24px;
-  font-weight: 400;
   border-radius: 10px;
+  color: #c4c4c4;
+  font-size: 1.5rem;
   background: #262626;
   -webkit-box-shadow: 5px 5px 10px #202020, -5px -5px 10px #2c2c2c;
           box-shadow: 5px 5px 10px #202020, -5px -5px 10px #2c2c2c;
-  color: #c4c4c4;
   cursor: pointer;
   -webkit-transition: .15s;
   transition: .15s;
 }
 
 .btn:hover, .btn:focus-visible {
-  color: #dffffd;
-  border-color: #424242;
   outline: none;
+  border-color: #424242;
+  color: #dffffd;
 }
 
 .btn:active {
@@ -176,11 +166,15 @@ body {
 
 .btn--operator, .btn--equally {
   border-color: #26333f;
-  font-size: 24px;
+  font-size: 1.75rem;
 }
 
 .btn--operator:hover, .btn--equally:hover {
   border-color: #314b61;
+}
+
+.btn--operator[data-unary], .btn--equally[data-unary] {
+  font-size: 1.5rem;
 }
 
 .btn--clear, .btn--backspace {
@@ -189,8 +183,4 @@ body {
 
 .btn--clear:hover, .btn--backspace:hover {
   border-color: #613731;
-}
-
-.btn sup {
-  font-size: 14px;
 }

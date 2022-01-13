@@ -8,15 +8,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="calculator">
 
-
-    <div class="output">
-      <input class="output__item output--top" type="text" name="output" id="output1" readonly>
-      <input class="output__item output--bottom" type="text" name="output" id="output2" value="0" readonly>
+    <div class="calculator__output">
+      <input class="output__item output__item--top" type="text" name="output" id="output1" readonly>
+      <input class="output__item output__item--bottom" type="text" name="output" id="output2" value="0" readonly>
     </div>
 
-    <div class="keyboard">
+    <div class="calculator__keyboard" id="keyboard">
 
       <div class="keyboard__operators operators--top">
         <button class="btn btn--operator" id="factorial" value="fact" data-unary>!</button>

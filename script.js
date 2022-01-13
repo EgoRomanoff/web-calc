@@ -1,6 +1,6 @@
 const outputTop = document.querySelector('#output1'),
       outputBottom = document.querySelector('#output2'),
-      keyboard = document.querySelector('.keyboard'),
+      keyboard = document.querySelector('#keyboard'),
       numbers = Array.from(document.querySelectorAll('.btn--number')),
       pointButton = document.querySelector('#point'),
       signButton = document.querySelector('#sign'),
@@ -9,20 +9,13 @@ const outputTop = document.querySelector('#output1'),
       clearButton = document.querySelector('#clear'),
       equallyButton = document.querySelector('#equally')
 
-// const curCalculation = {
-//   curOperand: '0',
-//   operand1: undefined,
-//   operator: undefined,
-//   operand2: undefined,
-//   curResult: undefined
-// }
-
 let currentOperand = '0',
     operand1 = undefined,
     operator = undefined,
     operand2 = undefined,
     currentResult = undefined,
     newOperandEntering = true
+    unaryOperationUnderway = false
 
 keyboard.addEventListener('click', e => {
 
@@ -39,6 +32,7 @@ keyboard.addEventListener('click', e => {
     } else {
       enterOperator(e.target)
     }
+
   }
 
   if (e.target === equallyButton) calculateResult()
@@ -47,7 +41,7 @@ keyboard.addEventListener('click', e => {
 
   if (e.target === clearButton) clearData()
 
-  console.log(currentOperand, operand1, operator, operand2, currentResult, newOperandEntering);
+  console.log(currentOperand + '\n' + operand1, operator, operand2 + '\n' + currentResult + '\n' + newOperandEntering);
 })
 
 function enterNumber(numButton) {
@@ -61,6 +55,7 @@ function enterNumber(numButton) {
 
   outputValue(currentOperand)
   outputExpression(numButton.value)
+
 }
 
 function enterPoint() {
@@ -69,8 +64,8 @@ function enterPoint() {
     return 0
   }
 
-  newOperandEntering = false
   currentOperand += pointButton.value
+  newOperandEntering = false
   outputValue(currentOperand)
   outputExpression(pointButton.value)
 
@@ -78,14 +73,12 @@ function enterPoint() {
 
 function toggleSign() {
 
-  if (operand2 !== undefined) {
-    operand1 = undefined
-    operand2 = undefined
-  }
-
   if (currentOperand === '0'){
     return 0
-  } else if (currentOperand.slice(0, 1) !== '-') {
+  }
+  outputExpression(signButton.value)
+
+  if (!currentOperand.includes('-')) {
     currentOperand = '-' + currentOperand
   } else {
     currentOperand = currentOperand.slice(1)
@@ -112,6 +105,7 @@ function enterOperator(operButton) {
 
   operator = operButton.value
   newOperandEntering = true
+  unaryOperationUnderway = false
   outputExpression(operButton)
 
 }
@@ -122,7 +116,7 @@ function calculateUnary(unaryOperator) {
   currentOperand = String(makeCalculation(parseFloat(currentOperand), unaryOperator))
   outputValue(currentOperand)
   newOperandEntering = true
-
+  unaryOperationUnderway = true
 }
 
 function calculateResult() {
@@ -161,6 +155,7 @@ function deleteLastSymbol() {
 function outputExpression(targetValue) {
 
   if (typeof targetValue === 'object') {
+
     switch (targetValue.value) {
       case 'add' :
         outputTop.value += ' + '
@@ -169,31 +164,94 @@ function outputExpression(targetValue) {
         outputTop.value += ' - '
         break
       case 'mul' :
-        outputTop.value += ' \u00D7 '
+
+        if (outputTop.value.search(/[\+-]/)) {
+          outputTop.value = `(${outputTop.value}) \u00D7 `
+        } else {
+          outputTop.value += ' \u00D7 '
+        }
+
         break
       case 'div' :
-        outputTop.value += ' \u00F7 '
+
+        if (outputTop.value.search(/[\+-]/)) {
+          outputTop.value = `(${outputTop.value}) \u00F7 `
+        } else {
+          outputTop.value += ' \u00F7 '
+        }
+
         break
     }
+
   } else {
+
     switch(targetValue) {
+      case 'sign' :
+        console.log(currentOperand.includes('-'));
+        if (!currentOperand.includes('-')) {
+          insertAtTheBeginning('-')
+        } else {
+          insertAtTheBeginning('')
+        }
+
+        break
       case 'fact' :
-        outputTop.value += '!'
+        insertAtTheEnd('!')
         break
       case 'perc' :
-        //TODO:исправить неправильный вывод
-        outputTop.value = `1%(${outputTop.value})`
+        insertAtTheBeginning('1%')
         break
       case 'square' :
-        outputTop.value += '\u00B2'
+        insertAtTheEnd('\u00B2')
         break
       case 'sqrt' :
-        //TODO:исправить неправильный вывод
-        outputTop.value = `\u221A(${outputTop.value})`
+        insertAtTheBeginning('\u221A')
         break
       default :
         outputTop.value += targetValue
     }
+
+  }
+
+}
+
+function insertAtTheBeginning(symbol) {
+
+  let currentString = outputTop.value.split(' ')
+
+  if (operand2 === undefined) {
+    currentString.pop()
+
+    symbol === '-' ?
+      currentString.push(`${symbol}${outputTop.value}`) :
+      symbol === '' ?
+        currentString.push(outputTop.value.slice(1)) :
+        currentString.push(`${symbol}(${outputTop.value})`)
+
+    outputTop.value = currentString.join(' ')
+  } else {
+
+    if (symbol === '') {
+      console.log(`length is ${outputTop.value.length}`);
+      outputTop.value = outputTop.value.slice(2, outputTop.value.length - 1)
+    } else {
+      outputTop.value = `${symbol}(${outputTop.value})`
+    }
+
+  }
+
+}
+
+function insertAtTheEnd(symbol) {
+
+  if (operand2 === undefined) {
+
+    unaryOperationUnderway ?
+      outputTop.value = `(${outputTop.value})${symbol}` :
+      outputTop.value += symbol
+
+  } else {
+    outputTop.value = `(${outputTop.value})${symbol}`
   }
 
 }
@@ -245,5 +303,13 @@ function calcDivision(a, b) {
 }
 
 function calcFactorial(n) {
-  return (n != 1) ? n * calcFactorial(n - 1) : 1
+
+  if (n < 0 || n % 1 !== 0) {
+    return 'Incorrect value'
+  } else if (n === 0) {
+    return 1
+  } else {
+    return (n != 1) ? n * calcFactorial(n - 1) : 1
+  }
+
 }
