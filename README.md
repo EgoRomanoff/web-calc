@@ -6,9 +6,8 @@
 <br>
 <div align="center">
 
-  ![react](https://user-images.githubusercontent.com/67374276/189316409-19d69d0f-b45f-430f-ac02-cf15051d6642.svg)&nbsp;
+  ![html](https://user-images.githubusercontent.com/67374276/189624538-7f47e804-3498-4d1c-9cf2-b1ba9b778eaf.svg)
   ![javascript](https://user-images.githubusercontent.com/67374276/189316388-4182d570-0a10-4dcf-9568-d13e7c6b5c56.svg)&nbsp;
-  ![jsx](https://user-images.githubusercontent.com/67374276/189318506-583a8454-9209-4e10-be2e-ed720f4f58db.svg)&nbsp;
   ![sass-scss](https://user-images.githubusercontent.com/67374276/189319440-79881be3-d7db-4506-87b8-57044a88b167.svg)
 
 </div>
@@ -20,21 +19,29 @@
 4. [Difficulties](#difficulties)
 
 ## Demo
+![WebCalc](https://user-images.githubusercontent.com/67374276/189625375-c7953947-787a-4109-8192-1da5ec27bb75.png)
 
-[**I Must Do**](https://egoromanoff.github.io/i-must-do-react/) - a Web TODO-application on React.js.
+[**WebCalc**](https://egoromanoff.github.io/web-calc/) - styled WEB digit calculator.
 
 ## Features
 
-***Basic features***:
-* viewing the task list;
-* adding, editing and deleting tasks;
-* view detailed information about a task.
-
-***Specific features***:
-* searching tasks by name;
-* setting the task completion status (*waiting, in progress, complete*)
-* dragging the border between the task list and the view & edit form
-* counting the total number of tasks and each type of tasks separately
+This web application has the basic functionality of a standard calculator:
+- ***basic binary*** arithmetic operations:
+  - *addition* - `+`
+  - *subtraction* - `-`
+  - *multiplication* - `*`
+  - *division* - `/`
+- ***advanced unary*** operations:
+  - *factorial* - `!`
+  - *calculating 1% of the number* - `%`
+  - *the square* - `x²`
+  - *the square root* - `√`
+- and functions ***for inputting values***:
+  - *clear* - `C`
+  - *backspace* - `←`
+  - *changing the sign* - `+/-`
+  - *output of the result* (equal) - `=`
+  - *input decimal separator* (point) - `.`
 
 ## Realizing
 
