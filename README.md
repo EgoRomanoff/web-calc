@@ -26,34 +26,26 @@
 ## Features
 
 This web application has the basic functionality of a standard calculator:
-- ***basic binary*** arithmetic operations:
-  - *addition* - `+`
-  - *subtraction* - `-`
-  - *multiplication* - `*`
-  - *division* - `/`
-- ***advanced unary*** operations:
-  - *factorial* - `!`
-  - *calculating 1% of the number* - `%`
-  - *the square* - `x²`
-  - *the square root* - `√`
-- and functions ***for inputting values***:
-  - *clear* - `C`
-  - *backspace* - `←`
-  - *changing the sign* - `+/-`
-  - *output of the result* (equal) - `=`
-  - *input decimal separator* (point) - `.`
+
+| ***Basic binary***   | ***Advanced unary***               | ***For inputting values***            |
+| -------------------- | ---------------------------------- | ------------------------------------- |
+| `+` - addition       | `!` - factorial                    | `C` - clear                           |
+| `-` - subtraction    | `%` - calculating 1% of the number | `←` - backspace                       |
+| `*` - multiplication | `x²` - the square                  | `+/-` - changing the sign             |
+| `/` - division       | `√` - the square root              | `=` - output of the result (equal)    |
+|                      |                                    | `.` - input decimal separator (point) |
+
+The user can enter numbers sequentially - after each operation it is not required to press `=`
+
+The application takes into account the **sequence** of operations.  
+This means that sequential input `2` `+` `2` `*` `2` will return the result `8` and not `6` - operation `*` will be applied to the sum of `2 + 2`
+
+![WebCalc-example](https://user-images.githubusercontent.com/67374276/189635149-6514df33-2b11-4b6c-8f0f-232a5f949ddf.png)
+
 
 ## Realizing
 
-In the process of creating this application, I have learned the base of [React.js](https://reactjs.org/) in practice :
-* [functional components](https://reactjs.org/docs/components-and-props.html#function-and-class-components);
-* [react-hooks (*useState, useEffect, useRef*)](https://reactjs.org/docs/hooks-faq.html#gatsby-focus-wrapper);
-* [Context API](https://reactjs.org/docs/context.html#gatsby-focus-wrapper);
-* [JSX](https://reactjs.org/docs/introducing-jsx.html);
-* [css-modules](https://habr.com/ru/post/335244/).
-
-I also used the [JavaScript Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to get tasks data from a [fake json server](https://jsonbin.io) when the application is starting.  
-I used [SASS (SCSS)](https://sass-lang.com/) for creating the styles of react-components as a scss-modules.
+In the process of creating this application, I 
 
 ## Difficulties
 
