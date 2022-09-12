@@ -52,6 +52,7 @@ Also I wanted to realize modern design - here I decided to use neomorphism and s
 During the creation of this application, ***I mastered***:
 - [event bubbling and capture](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling_and_capture)
 - [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+- [*Math* built-in object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
 
 ## Difficulties
 
