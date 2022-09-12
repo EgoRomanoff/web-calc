@@ -46,14 +46,17 @@ This means that sequential input `2` `+` `2` `*` `2` will return the result `8` 
 
 ## Realizing
 
-In the process of creating this application, I 
+***My main goal*** is to try to create a full-fledged application without using frameworks.  
+Also I wanted to realize modern design - here I decided to use neomorphism and smooth shadows.
+
+During the creation of this application, ***I mastered***:
+- [event bubbling and capture](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling_and_capture)
+- [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 ## Difficulties
 
 ### **Known bugs**:
-- [ ] incorrect display of `%` & `√` operation;
-- [ ] raw overflow of the result string;
-- [ ] no rounding of floating number (JavaScript specifics);
+- [ ] incorrect display of `%` `√` and `+/-` operation;
+- [ ] incorrect display of overflowing *result string* and *expression string*;
 - [ ] incorrect display of floating numbers with zero in the integer part;
-
-
+- [ ] no rounding of floating number (JavaScript specifics);
