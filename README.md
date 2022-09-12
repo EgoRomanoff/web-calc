@@ -46,8 +46,8 @@ This means that sequential input `2` `+` `2` `*` `2` will return the result `8` 
 
 ## Realizing
 
-***My main goal*** is to try to create a full-fledged application without using frameworks.  
-Also I wanted to realize modern design - here I decided to use neomorphism and smooth shadows.
+***My main goal*** - to try to create a full-fledged application without using frameworks.  
+Also I wanted to realize modern design - here I decided to use ***neomorphism*** and ***smooth shadows***.
 
 During the creation of this application, ***I mastered***:
 - [event bubbling and capture](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling_and_capture)
