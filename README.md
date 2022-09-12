@@ -1,4 +1,3 @@
-<br>
 <h1 align="center">
   <a href="https://egoromanoff.github.io/web-calc/" target="_blank" title="'WebCalc' Demo Link">
     WebCalc
