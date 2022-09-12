@@ -1,9 +1,9 @@
 <br>
-<div align="center">
-  <a href="https://egoromanoff.github.io/i-must-do-react/" target="_blank" title="'I Must Do' Demo Link">
-    <img alt="I Must Do logo" src="https://user-images.githubusercontent.com/67374276/189341459-d35f57b6-e2d4-46be-94c0-3b878738540a.svg" width="200px">
+<h1 align="center">
+  <a href="https://egoromanoff.github.io/web-calc/" target="_blank" title="'WebCalc' Demo Link">
+    WebCalc
   </a>
-</div>
+</h1>
 <br>
 <div align="center">
 
@@ -51,41 +51,4 @@ I used [SASS (SCSS)](https://sass-lang.com/) for creating the styles of react-co
 
 ## Difficulties
 
-A particular difficulty for me was the dragging the border between the task list and the view & edit form.  
-I realized it with [Resizer-element](https://github.com/EgoRomanoff/i-must-do-react/tree/master/src/components/Resizer) and events ```onDrugStart``` and ```onDrug```
-``` javascript
-function Resizer({ className, resizableElem }) {
-
-	let startPosition, tasksWidth
-
-	// creating an element for changing drag effect picture
-	const dragImg = document.createElement('canvas');
-	dragImg.classList.add('drag-img')
-
-	// get coordinates and width values at the start of resizing
-	const startResize = e => {
-		e.stopPropagation()
-		startPosition = e.clientX // X of resizer element
-		tasksWidth = resizableElem.current.offsetWidth // current width of Resizer element
-		e.dataTransfer.setDragImage(dragImg, 0, 0) // set drag image
-		e.target.style.cursor = 'col-resize'
-	}
-
-	// change width when border is moving
-	const resize = e => {
-		resizableElem.current.style.width = `${tasksWidth + e.clientX - startPosition}px`
-	}
-
-	return (
-		<div
-	    className={ className }
-      draggable={ true }
-      onDragStart={ startResize }
-      onDrag={ resize }
-    />
-	)
-}
-
-export default Resizer
-```
 
