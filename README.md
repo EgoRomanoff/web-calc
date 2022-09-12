@@ -40,13 +40,20 @@ The user can enter numbers sequentially - after each operation it is not require
 The application takes into account the **sequence** of operations.  
 This means that sequential input `2` `+` `2` `*` `2` will return the result `8` and not `6` - operation `*` will be applied to the sum of `2 + 2`
 
-![WebCalc-example](https://user-images.githubusercontent.com/67374276/189635149-6514df33-2b11-4b6c-8f0f-232a5f949ddf.png)
-
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/67374276/189635149-6514df33-2b11-4b6c-8f0f-232a5f949ddf.png" alt="WebCalc (sequence of operations)">
+</div>
 
 ## Realizing
 
 In the process of creating this application, I 
 
 ## Difficulties
+
+### **Known bugs**:
+- [ ] incorrect display of `%` & `√` operation;
+- [ ] raw overflow of the result string;
+- [ ] no rounding of floating number (JavaScript specifics);
+- [ ] incorrect display of floating numbers with zero in the integer part;
 
 
